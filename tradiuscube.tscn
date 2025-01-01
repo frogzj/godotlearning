@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqjmqcg72onft"]
+[gd_scene load_steps=10 format=3 uid="uid://bqjmqcg72onft"]
 
 [ext_resource type="Script" path="res://tradiuscube.gd" id="1_m70a3"]
 [ext_resource type="AudioStream" uid="uid://d3kbk3xw1xr1d" path="res://tradius_layer1.ogg" id="1_vfaeb"]
+[ext_resource type="AudioStream" uid="uid://b27fs6ynxv7up" path="res://tradius_layer2.ogg" id="3_68nlb"]
+[ext_resource type="AudioStream" uid="uid://dxg6kxjamogmf" path="res://tradius_layer3.ogg" id="4_sfyt2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q06gu"]
 albedo_color = Color(1, 0, 0, 1)
@@ -11,6 +13,12 @@ material = SubResource("StandardMaterial3D_q06gu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_umh64"]
 radius = 32.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cfa60"]
+radius = 24.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_36tci"]
+radius = 12.0
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_m70a3")
@@ -26,8 +34,28 @@ shape = SubResource("SphereShape3D_umh64")
 [node name="tradius_layer1" type="AudioStreamPlayer" parent="Area3D"]
 stream = ExtResource("1_vfaeb")
 volume_db = -80.0
-autoplay = true
 parameters/looping = true
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[node name="Layer2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2"]
+shape = SubResource("SphereShape3D_cfa60")
+
+[node name="tradius_layer2" type="AudioStreamPlayer" parent="Layer2"]
+stream = ExtResource("3_68nlb")
+volume_db = -80.0
+
+[node name="Layer3" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer3"]
+shape = SubResource("SphereShape3D_36tci")
+
+[node name="tradius_layer3" type="AudioStreamPlayer" parent="Layer3"]
+stream = ExtResource("4_sfyt2")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_layer_1_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_layer_1_body_exited"]
+[connection signal="body_entered" from="Layer2" to="." method="_on_layer_2_body_entered"]
+[connection signal="body_exited" from="Layer2" to="." method="_on_layer_2_body_exited"]
+[connection signal="body_entered" from="Layer3" to="." method="_on_layer_3_body_entered"]
+[connection signal="body_exited" from="Layer3" to="." method="_on_layer_3_body_exited"]
