@@ -13,7 +13,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
+## this tradiusplay thing is supposed to stop ALL tradius audios from playing upon entering the scene
+## it doesnt do that!!! at all!...
 func _on_layer_1_body_entered(body: Node3D) -> void:
 	if tradiusplay == false:
 		tradiusplay = true
