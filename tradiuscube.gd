@@ -8,53 +8,54 @@ func _ready() -> void:
 	await 2
 	tradiuslayer1.stop()
 	tradiuslayer2.stop()
-	tradiuslayer3
+	tradiuslayer3.stop()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-## this tradiusplay thing is supposed to stop ALL tradius audios from playing upon entering the scene
-## it doesnt do that!!! at all!...
-func _on_layer_1_body_entered(body: Node3D) -> void:
+
+func _on_layer_1_body_entered(body: CharacterBody3D) -> void:
 	if tradiusplay == false:
 		tradiusplay = true
 		tradiuslayer1.play()
 		tradiuslayer2.play()
+		tradiuslayer2.volume_db = -120
 		tradiuslayer3.play()
+		tradiuslayer3.volume_db = -120
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer1, "volume_db", 0, 2)
 	tween.play()
 	await tween.finished
 
-func _on_layer_1_body_exited(body: Node3D) -> void:
+func _on_layer_1_body_exited(_body: CharacterBody3D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer1, "volume_db", -120, 2)
 	tween.play()
 	await tween.finished
 	
 
-func _on_layer_2_body_entered(body: Node3D) -> void:
+func _on_layer_2_body_entered(_body: CharacterBody3D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer2, "volume_db", 0, 0.8)
 	tween.tween_property(tradiuslayer1, "volume_db", -120, 2)
 	tween.play()
 	await tween.finished
 
-func _on_layer_2_body_exited(body: Node3D) -> void:
+func _on_layer_2_body_exited(_body: CharacterBody3D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer1, "volume_db", 0, 2)
 	tween.tween_property(tradiuslayer2, "volume_db", -120, 2)
 	tween.play()
 	await tween.finished
 
-func _on_layer_3_body_entered(body: Node3D) -> void:
+func _on_layer_3_body_entered(_body: CharacterBody3D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer3, "volume_db", 0, 0.8)
 	tween.tween_property(tradiuslayer2, "volume_db", -120, 2)
 	tween.play()
 	await tween.finished
 
-func _on_layer_3_body_exited(body: Node3D) -> void:
+func _on_layer_3_body_exited(_body: CharacterBody3D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(tradiuslayer2, "volume_db", 0, 2)
 	tween.tween_property(tradiuslayer3, "volume_db", -120, 2)
