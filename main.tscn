@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsxsws32qpo4m"]
+
+[ext_resource type="PackedScene" uid="uid://rjailbw5wbjs" path="res://Player/Player.tscn" id="1_pmi8g"]
+[ext_resource type="PackedScene" uid="uid://c4otbqofe5gib" path="res://Inventory/Items/ItemFlashlight.tscn" id="2_088h2"]
+[ext_resource type="PackedScene" uid="uid://dkusbpuj08dat" path="res://Inventory/Items/TestCube.tscn" id="2_aj32p"]
+[ext_resource type="PackedScene" uid="uid://bqjmqcg72onft" path="res://tradiuscube.tscn" id="4_bypsf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cw8jg"]
+sky_top_color = Color(0.626909, 0.775262, 0.895714, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_yu4i3"]
+sky_material = SubResource("ProceduralSkyMaterial_cw8jg")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_bi0bg"]
+background_mode = 1
+background_color = Color(0.708977, 0.883898, 1, 1)
+sky = SubResource("Sky_yu4i3")
+ambient_light_source = 3
+ambient_light_color = Color(0.613098, 0.820584, 0.978775, 1)
+ssr_enabled = true
+ssao_enabled = true
+
+[node name="Main" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.662176, -0.653471, 0.366741, 0, 0.489413, 0.872052, -0.749349, -0.577452, 0.324077, 0, 3.8892, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bi0bg")
+
+[node name="Player" parent="." instance=ExtResource("1_pmi8g")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(41.76, 0, 0, 0, 1, 0, 0, 0, 3.96, 0, -1.71104, 0)
+use_collision = true
+size = Vector3(3, 0.378, 30)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(108.994, 0, 0, 0, 1, 0, 0, 0, 1, 4.15161, -1.23831, -0.365601)
+use_collision = true
+size = Vector3(0.0177002, 0.731698, 5.33032)
+
+[node name="ItemFlashlight" parent="." instance=ExtResource("2_088h2")]
+transform = Transform3D(0.777431, 0, 0.628968, 0, 1, 0, -0.628968, 0, 0.777431, 3.89607, -0.774564, -1.34737)
+freeze = true
+
+[node name="ItemTestCube" parent="." instance=ExtResource("2_aj32p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90895, -0.357728, 0)
+freeze = true
+
+[node name="Node3D" parent="." instance=ExtResource("4_bypsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9732, 0, -1.28577)

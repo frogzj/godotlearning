@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqjmqcg72onft"]
+
+[ext_resource type="Script" path="res://tradiuscube.gd" id="1_m70a3"]
+[ext_resource type="AudioStream" uid="uid://d3kbk3xw1xr1d" path="res://tradius_layer1.ogg" id="1_vfaeb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q06gu"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ysaah"]
+material = SubResource("StandardMaterial3D_q06gu")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_umh64"]
+radius = 32.0
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_m70a3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ysaah")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_umh64")
+
+[node name="tradius_layer1" type="AudioStreamPlayer" parent="Area3D"]
+stream = ExtResource("1_vfaeb")
+volume_db = -80.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc1pld374eocl"]
+
+[ext_resource type="AudioStream" uid="uid://d3kbk3xw1xr1d" path="res://tradius_layer1.ogg" id="1_c8qob"]
+[ext_resource type="AudioStream" uid="uid://b27fs6ynxv7up" path="res://tradius_layer2.ogg" id="3_21uqu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvmnn"]
+radius = 32.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_snr6s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vjarr"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="TRadius" type="Area3D" parent="."]
+disable_mode = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TRadius"]
+shape = SubResource("SphereShape3D_xvmnn")
+
+[node name="TRadius player" type="Node3D" parent="TRadius/CollisionShape3D"]
+
+[node name="Layer1" type="AudioStreamPlayer" parent="TRadius/CollisionShape3D/TRadius player"]
+stream = ExtResource("1_c8qob")
+
+[node name="Layer2" type="AudioStreamPlayer" parent="TRadius/CollisionShape3D/TRadius player"]
+stream = ExtResource("3_21uqu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_snr6s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vjarr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.946975, 0.321307, 0, -0.321307, 0.946975, 0, 0.57133, -0.521489)
+light_color = Color(0.985358, 0.0469894, 7.70092e-07, 1)
+spot_angle = 21.464
+
+[connection signal="area_entered" from="TRadius" to="." method="_on_t_radius_area_entered"]
