@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://doxeprpo3vqdb"]
+
+[ext_resource type="Texture2D" uid="uid://c8i221brkbldh" path="res://Assets/flash-lite_flashlight_0.png" id="1_464jx"]
+[ext_resource type="Texture2D" uid="uid://dux766i1o7nks" path="res://Assets/flash-lite_flashlight_1.png" id="2_23xx2"]
+
+[resource]
+albedo_texture = ExtResource("1_464jx")
+metallic = 1.0
+metallic_texture = ExtResource("2_23xx2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_23xx2")
+roughness_texture_channel = 1
+ao_enabled = true
+ao_texture = ExtResource("2_23xx2")
